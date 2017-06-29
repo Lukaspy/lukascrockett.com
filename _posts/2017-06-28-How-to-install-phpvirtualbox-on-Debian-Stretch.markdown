@@ -4,7 +4,7 @@ title:  "How to install phpvirtualbox on Debain 9.0 (Stretch)"
 date: 2017-06-28
 ---
 
-Phpvirtualbox is a web applicaton written in php that allows you to manage Oracle's Virtualbox VMs. Although Phpvirtual box is currently (As of 28-06-2017) 
+Phpvirtualbox is a web applicaton that allows you to manage Oracle's Virtualbox VMs. Although Phpvirtual box is currently (As of 28-06-2017) 
 a verion behind Virtualbox development, a simple workaround can be applied. 
 
 First we need to install Apache and PHP (Plus its components.) in order to serve Phpvirtualbox:
