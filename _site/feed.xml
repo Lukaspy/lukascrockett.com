@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>KD9A</title>
+    <description>KD9A</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sun, 14 Jan 2018 23:23:17 -0700</pubDate>
+    <lastBuildDate>Sun, 14 Jan 2018 23:23:17 -0700</lastBuildDate>
+    <generator>Jekyll v3.4.0</generator>
+    
+      
+      <item>
+        <title>Wii Wireless Sensor Bar Battery-less mod</title>
+        <description>&lt;p&gt;Earlier today I got out the ol’ wii to setup for my younger brother and low and behold the wireless rechargable sensor bar had finally given up the ghost. These 
+sensor bars are relatively simple so I figured the most likely reason it died was the old batteries. I cracked it open and the NiMH batteries had indeed begun 
+leaking.&lt;img src=&quot;/assets/img/posts/2018-01-14/case_open.jpg&quot; alt=&quot;case opened&quot; /&gt; Desoldering the batteries allowed the bar to power on properly, but it was constantly trying to charge the nonexistant battery pack. &lt;img src=&quot;/assets/img/posts/2018-01-14/battery_removed.jpg&quot; alt=&quot;battery removed&quot; /&gt;If I tried
+activating the bar it would simply restart into charging mode. I had to trick the bar into thinking that the batteries (That were no longer there) were fully 
+charged. If you take some thin wire and solder it between the positive of the battery pad and the 5volt input from the usb mini jack, it will work correctly 
+(Obviouly it would have to allways be plugged into usb, but that was not a problem for me.) &lt;img src=&quot;/assets/img/posts/2018-01-14/battery-mod.jpg&quot; alt=&quot;modded&quot; /&gt; This is a rather ugly hack, but it was done on a ten year old
+consumer product, so I don’t really care! Hope this helped you out.&lt;/p&gt;
+</description>
+        
+          <description>&lt;p&gt;Earlier today I got out the ol’ wii to setup for my younger brother and low and behold the wireless rechargable sensor bar had finally given up the ghost. These 
+sensor bars are relatively simple so I figured the most likely reason it died was the old batteries. I cracked it open and the NiMH batteries had indeed begun 
+leaking.&lt;img src=&quot;/assets/img/posts/2018-01-14/case_open.jpg&quot; alt=&quot;case opened&quot; /&gt; Desoldering the batteries allowed the bar to power on properly, but it was constantly trying to charge the nonexistant battery pack. &lt;img src=&quot;/assets/img/posts/2018-01-14/battery_removed.jpg&quot; alt=&quot;battery removed&quot; /&gt;If I tried
+activating the bar it would simply restart into charging mode. I had to trick the bar into thinking that the batteries (That were no longer there) were fully 
+charged. If you take some thin wire and solder it between the positive of the battery pad and the 5volt input from the usb mini jack, it will work correctly 
+(Obviouly it would have to allways be plugged into usb, but that was not a problem for me.) &lt;img src=&quot;/assets/img/posts/2018-01-14/battery-mod.jpg&quot; alt=&quot;modded&quot; /&gt; This is a rather ugly hack, but it was done on a ten year old
+consumer product, so I don’t really care! Hope this helped you out.&lt;/p&gt;
+</description>
+        
+        <pubDate>Sun, 14 Jan 2018 00:00:00 -0700</pubDate>
+        <link>http://localhost:4000/blog/Wii-Wireless-Sensor-bar-battery-mod/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/Wii-Wireless-Sensor-bar-battery-mod/</guid>
+        
+        
+      </item>
+      
+    
+      
+      <item>
+        <title>How to install phpvirtualbox on Debain 9.0 (Stretch)</title>
+        <description>&lt;p&gt;Phpvirtualbox is a web applicaton that allows you to manage Oracle’s Virtualbox VMs. Although Phpvirtual box is currently (As of 28-06-2017) 
+a verion behind Virtualbox development, a simple workaround can be applied.&lt;/p&gt;
+
+&lt;p&gt;First we need to install Apache and PHP (Plus its components.) in order to serve Phpvirtualbox:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;sudo apt-get update
+sudo apt-get install apache2 php php-xml php-soap &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Next we can install the latest version of virtualbox from Oracle’s debian repositories:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;c&quot;&gt;#Add virtual box to sources.list.d&lt;/span&gt;
+sudo vim /etc/apt/sources.list.d/virtualbox.list
+&lt;span class=&quot;c&quot;&gt;#Inside add the offical Oracle repos&lt;/span&gt;
+deb http://download.virtualbox.org/virtualbox/debian stretch contrib&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Then we add the Virtualbox pub key&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;c&quot;&gt;#Download key&lt;/span&gt;
+curl -O https://www.virtualbox.org/download/oracle_vbox_2016.asc
+&lt;span class=&quot;c&quot;&gt;#Add key to apt&lt;/span&gt;
+sudo apt-key add oracle_vbox_2016.asc&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now we are able to install Virtualbox&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;sudo apt-get update
+sudo apt-get install virtualbox-5.1&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;In order to use the built in rdp client, usb 2&amp;amp;3, plus some other features, we need to install the &lt;a href=&quot;https://www.virtualbox.org/wiki/Downloads&quot;&gt;Virtualbox Extension Pack&lt;/a&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;c&quot;&gt;#You use wget to download the pack (After obtaining the most recent version's link)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /tmp
+wget http://download.virtualbox.org/virtualbox/5.1.22/Oracle_VM_VirtualBox_Extension_Pack-5.1.22-115126.vbox-extpack
+&lt;span class=&quot;c&quot;&gt;#Now we can intstall the pack with vboxmanage&lt;/span&gt;
+vboxmanage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.1.22-115126.vbox-extpack&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;In order to allow phpvirtualbox the ability to access the vboxwebserver, we need to create a user that belongs to the vboxusers group.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;c&quot;&gt;#Add user named 'vbox' whose primary group is vboxusers&lt;/span&gt;
+useradd -d /home/vbox -m -g vboxusers -s /bin/bash vbox
+&lt;span class=&quot;c&quot;&gt;#Give user 'vbox' a password&lt;/span&gt;
+passwd vbox&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Phpvirtualbox uses a service called vboxwebsrv provided by Virtualbox to manage all the aspects of a VM. This service is not enabled by default, so we need to 
+make it start at boot&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;c&quot;&gt;#Create an entry in init.d that starts the vboxwebsrv&lt;/span&gt;
+sudo vim /etc/init.d/vboxweb
+&lt;span class=&quot;c&quot;&gt;#Inside the file add the following:&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+sudo -u vbox  vboxwebsrv &amp;amp;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The file should look like this:
+&lt;img src=&quot;http://localhost:4000/assets/img/posts/2017-06-28/screenshot1.jpg&quot; alt=&quot;/etc/init.d/vboxweb&quot; /&gt;
+Now we need to enable the execute bit and tell init to run the file at boot&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;sudo chmod +x /etc/init.d/vboxweb
+sudo update-rc.d vboxweb defaults&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The Virtualbox internals are now finished! We can proceed to the phpvirualbox setup.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;c&quot;&gt;#Download the newest version of phpvirtualbox&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /tmp
+wget http://sourceforge.net/projects/phpvirtualbox/files/latest/download -O phpvirtualbox.zip
+unzip phpvirtualbox.zip -d /var/www/html/phpvirtualbox&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;We need to tell phpvirtualbox which user to run as, in this case we will use the user we created earlier ‘vbox’&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;sudo mv /var/www/html/phpvirtualbox/config.php-example /var/www/html/phpvirtualbox/config.php
+&lt;span class=&quot;c&quot;&gt;#In the config.php file change the '$username' and '$password' values to that of the vbox user&lt;/span&gt;
+sudo vim /var/www/html/phpvirtualbox/config.php&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;This is what the file should look like once you are done:
+&lt;img src=&quot;http://localhost:4000/assets/img/posts/2017-06-28/screenshot2.jpg&quot; alt=&quot;/var/www/html/phpvirtualbox/config.php&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When installing phpvirtualbox I generally change apache’s default document root to /var/www/html/phpvirtualbox, but this is a matter of preference, if you wish
+to do so, run the following commands.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;sudo vim /etc/apache2/sites-available/000-default.conf
+&lt;span class=&quot;c&quot;&gt;#Then change the doc root from /var/www/html to /var/www/html/phpvirtualbox by editing the 'DocumentRoot' line&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/img/posts/2017-06-28/screenshot3.jpg&quot; alt=&quot;/etc/apache2/sites-available/000-default.conf&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;At this point you could reboot and point your browser to your server, but you would get a version missmatch error, in order to rectify this, you must apply a
+workaround&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /var/www/html/phpvirtualbox/endpoints/lib/
+sudo vim config.php
+&lt;span class=&quot;c&quot;&gt;#You must comment out the 'define('PHPVBOX_VER', '5.0-5');' line and add 'define('PHPVBOX_VER', '5.1-0');'&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/img/posts/2017-06-28/screenshot4.jpg&quot; alt=&quot;/var/www/html/phpvirtualbox/endpoints/lib/config.php&quot; /&gt;
+Then add a symbolic link to the following files.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-shell&quot; data-lang=&quot;shell&quot;&gt;sudo ln -s /var/www/html/phpvirtualbox/endpoints/lib/vboxweb-5.0.wsdl/var/www/html/phpvirtualbox/endpoints/lib/vboxweb-5.1.wsdl
+sudo ln -s /var/www/html/phpvirutalbox/endpoints/lib/vboxwebService-5.0.wsdl /var/www/html/phpvirtualbox/endpoints/lib/vboxwebService-5.1.wsdl&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;After running the last commands and rebooting, you should be able to access the phpvirtualbox interface at the server’s ip or domain name.
+Congratulations! You now have a working phpvirtualbox install!
+&lt;img src=&quot;http://localhost:4000/assets/img/posts/2017-06-28/screenshot5.png&quot; alt=&quot;phpvirtualbox&quot; /&gt;&lt;/p&gt;
+
+</description>
+        
+          <description>&lt;p&gt;Phpvirtualbox is a web applicaton that allows you to manage Oracle’s Virtualbox VMs. Although Phpvirtual box is currently (As of 28-06-2017) 
+a verion behind Virtualbox development, a simple workaround can be applied.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 28 Jun 2017 00:00:00 -0600</pubDate>
+        <link>http://localhost:4000/blog/How-to-install-phpvirtualbox-on-Debian-Stretch/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/How-to-install-phpvirtualbox-on-Debian-Stretch/</guid>
+        
+        
+      </item>
+      
+    
+      
+      <item>
+        <title>Here's my shack, and welcome to the new website!</title>
+        <description>&lt;p class=&quot;intro&quot;&gt;&lt;span class=&quot;dropcap&quot;&gt;H&lt;/span&gt;ey everyone, Today I'll be posting some pictures of my shack, as of September 6, 2016.&lt;/p&gt;
+
+&lt;p&gt;I actually enjoy many hobbies, almost all of which have to do with technical stuff though. Here’s the table for my most obvious hobby, (And what this website is mainly about!) ham radio!. 
+&lt;img src=&quot;/assets/img/posts/2016-9-5/ham.JPG&quot; alt=&quot;&quot; /&gt; 
+The equipment I have is listed on my about page if you’re interested. Next up is electronics, which is pretty intrinsically linked with ham radio.
+&lt;img src=&quot;/assets/img/posts/2016-9-5/workbench.JPG&quot; alt=&quot;&quot; /&gt;
+I won’t go over the equipment here in this post, but maybe in a later post I’ll focus here in more detail. Ever since I remember I’ve wanted to be an electrical engineer, so hopefully that’s where I’ll end up!
+Not only am I interested in that stuff but also, computers and programming! If you don’t already I highly recommend getting at least two monitors for your computer, I know i
+has made me more productive! Even if you just use your computer for ham radio stuff you could have propagation, or a spotting network on one monitor and your logger on the other.
+&lt;img src=&quot;/assets/img/posts/2016-9-5/computer.JPG&quot; alt=&quot;&quot; /&gt;
+I generally like to keep a pretty clean and organized shack and this has really helped store stuff. As you can see here I’m using it to mostly store some electronics parts bins.
+&lt;img src=&quot;/assets/img/posts/2016-9-5/shelf.JPG&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/assets/img/posts/2016-9-5/partsbin.JPG&quot; alt=&quot;&quot; /&gt;
+Just behind my radio table I’ve got a great view of Bogus Basin. Up on top is Shafer Butte where many local 2m repeaters are located.
+I also took a zoomed in photo of the towers.
+&lt;img src=&quot;/assets/img/posts/2016-9-5/view.JPG&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/assets/img/posts/2016-9-5/shbute.JPG&quot; alt=&quot;&quot; /&gt;
+Here’s my indoor 2m jpole, since I have such a good line of sight to the majority of the repeaters in the Boise greater area I always get a 59+ to them.
+&lt;img src=&quot;/assets/img/posts/2016-9-5/jpole.JPG&quot; alt=&quot;&quot; /&gt;
+In closing, I would like to talk about the direction of this website. For now this isn’t going to be anything formal, but hopefully I will be able to update this around once a month. This website will not only be about ham radio but also electronics, and computer stuff, so if those aren’t your cup of tea feel free not to read those. Thanks for reading and feel free to come back for some more!&lt;/p&gt;
+</description>
+        
+          <description>&lt;p class=&quot;intro&quot;&gt;&lt;span class=&quot;dropcap&quot;&gt;H&lt;/span&gt;ey everyone, Today I'll be posting some pictures of my shack, as of September 6, 2016.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 06 Sep 2016 00:00:00 -0600</pubDate>
+        <link>http://localhost:4000/blog/Here's-my-shack/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/Here's-my-shack/</guid>
+        
+        
+      </item>
+      
+    
+  </channel>
+</rss>

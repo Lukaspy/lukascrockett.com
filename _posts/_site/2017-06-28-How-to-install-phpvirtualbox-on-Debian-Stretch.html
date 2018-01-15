@@ -1,0 +1,99 @@
+<p>Phpvirtualbox is a web applicaton that allows you to manage Oracle’s Virtualbox VMs. Although Phpvirtual box is currently (As of 28-06-2017) 
+a verion behind Virtualbox development, a simple workaround can be applied.</p>
+
+<p>First we need to install Apache and PHP (Plus its components.) in order to serve Phpvirtualbox:</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">sudo apt-get update
+sudo apt-get install apache2 php php-xml php-soap </code></pre></figure>
+
+<p>Next we can install the latest version of virtualbox from Oracle’s debian repositories:</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="c">#Add virtual box to sources.list.d</span>
+sudo vim /etc/apt/sources.list.d/virtualbox.list
+<span class="c">#Inside add the offical Oracle repos</span>
+deb http://download.virtualbox.org/virtualbox/debian stretch contrib</code></pre></figure>
+
+<p>Then we add the Virtualbox pub key</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="c">#Download key</span>
+curl -O https://www.virtualbox.org/download/oracle_vbox_2016.asc
+<span class="c">#Add key to apt</span>
+sudo apt-key add oracle_vbox_2016.asc</code></pre></figure>
+
+<p>Now we are able to install Virtualbox</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">sudo apt-get update
+sudo apt-get install virtualbox-5.1</code></pre></figure>
+
+<p>In order to use the built in rdp client, usb 2&amp;3, plus some other features, we need to install the <a href="https://www.virtualbox.org/wiki/Downloads">Virtualbox Extension Pack</a></p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="c">#You use wget to download the pack (After obtaining the most recent version's link)</span>
+<span class="nb">cd</span> /tmp
+wget http://download.virtualbox.org/virtualbox/5.1.22/Oracle_VM_VirtualBox_Extension_Pack-5.1.22-115126.vbox-extpack
+<span class="c">#Now we can intstall the pack with vboxmanage</span>
+vboxmanage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.1.22-115126.vbox-extpack</code></pre></figure>
+
+<p>In order to allow phpvirtualbox the ability to access the vboxwebserver, we need to create a user that belongs to the vboxusers group.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="c">#Add user named 'vbox' whose primary group is vboxusers</span>
+useradd -d /home/vbox -m -g vboxusers -s /bin/bash vbox
+<span class="c">#Give user 'vbox' a password</span>
+passwd vbox</code></pre></figure>
+
+<p>Phpvirtualbox uses a service called vboxwebsrv provided by Virtualbox to manage all the aspects of a VM. This service is not enabled by default, so we need to 
+make it start at boot</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="c">#Create an entry in init.d that starts the vboxwebsrv</span>
+sudo vim /etc/init.d/vboxweb
+<span class="c">#Inside the file add the following:</span>
+<span class="c">#!/bin/bash</span>
+sudo -u vbox  vboxwebsrv &amp;</code></pre></figure>
+
+<p>The file should look like this:
+<img src="http://localhost:4000/assets/img/posts/2017-06-28/screenshot1.jpg" alt="/etc/init.d/vboxweb" />
+Now we need to enable the execute bit and tell init to run the file at boot</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">sudo chmod +x /etc/init.d/vboxweb
+sudo update-rc.d vboxweb defaults</code></pre></figure>
+
+<p>The Virtualbox internals are now finished! We can proceed to the phpvirualbox setup.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="c">#Download the newest version of phpvirtualbox</span>
+<span class="nb">cd</span> /tmp
+wget http://sourceforge.net/projects/phpvirtualbox/files/latest/download -O phpvirtualbox.zip
+unzip phpvirtualbox.zip -d /var/www/html/phpvirtualbox</code></pre></figure>
+
+<p>We need to tell phpvirtualbox which user to run as, in this case we will use the user we created earlier ‘vbox’</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">sudo mv /var/www/html/phpvirtualbox/config.php-example /var/www/html/phpvirtualbox/config.php
+<span class="c">#In the config.php file change the '$username' and '$password' values to that of the vbox user</span>
+sudo vim /var/www/html/phpvirtualbox/config.php</code></pre></figure>
+
+<p>This is what the file should look like once you are done:
+<img src="http://localhost:4000/assets/img/posts/2017-06-28/screenshot2.jpg" alt="/var/www/html/phpvirtualbox/config.php" /></p>
+
+<p>When installing phpvirtualbox I generally change apache’s default document root to /var/www/html/phpvirtualbox, but this is a matter of preference, if you wish
+to do so, run the following commands.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">sudo vim /etc/apache2/sites-available/000-default.conf
+<span class="c">#Then change the doc root from /var/www/html to /var/www/html/phpvirtualbox by editing the 'DocumentRoot' line</span></code></pre></figure>
+
+<p><img src="http://localhost:4000/assets/img/posts/2017-06-28/screenshot3.jpg" alt="/etc/apache2/sites-available/000-default.conf" /></p>
+
+<p>At this point you could reboot and point your browser to your server, but you would get a version missmatch error, in order to rectify this, you must apply a
+workaround</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /var/www/html/phpvirtualbox/endpoints/lib/
+sudo vim config.php
+<span class="c">#You must comment out the 'define('PHPVBOX_VER', '5.0-5');' line and add 'define('PHPVBOX_VER', '5.1-0');'</span></code></pre></figure>
+
+<p><img src="http://localhost:4000/assets/img/posts/2017-06-28/screenshot4.jpg" alt="/var/www/html/phpvirtualbox/endpoints/lib/config.php" />
+Then add a symbolic link to the following files.</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">sudo ln -s /var/www/html/phpvirtualbox/endpoints/lib/vboxweb-5.0.wsdl/var/www/html/phpvirtualbox/endpoints/lib/vboxweb-5.1.wsdl
+sudo ln -s /var/www/html/phpvirutalbox/endpoints/lib/vboxwebService-5.0.wsdl /var/www/html/phpvirtualbox/endpoints/lib/vboxwebService-5.1.wsdl</code></pre></figure>
+
+<p>After running the last commands and rebooting, you should be able to access the phpvirtualbox interface at the server’s ip or domain name.
+Congratulations! You now have a working phpvirtualbox install!
+<img src="http://localhost:4000/assets/img/posts/2017-06-28/screenshot5.png" alt="phpvirtualbox" /></p>
+
