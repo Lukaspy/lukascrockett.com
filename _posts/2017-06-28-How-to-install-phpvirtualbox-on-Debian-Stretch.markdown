@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "How to install phpvirtualbox on Debain 9.0 (Stretch)"
+title:  "How to install phpvirtualbox on Debian 9.0 (Stretch)"
 date: 2017-06-28
 ---
 
